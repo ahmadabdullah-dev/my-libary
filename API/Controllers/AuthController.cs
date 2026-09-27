@@ -33,5 +33,13 @@ public class AuthController : BaseApiController
 
         return HandleResult(result);
     }
+    [Authorize]
+    [HttpPatch("confirm-current-email")]
+    public async Task<IActionResult> ConfirmCurrentEmail(string code)
+    {
+        var result = await _authService.ConfirmCurrentEmailAsync(code);
+
+        return HandleResult(result);
+    }
 
 }
