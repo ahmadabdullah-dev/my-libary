@@ -8,6 +8,7 @@ import ErrorPage from "../../features/errors/ErrorPage";
 import NotFound from "../../features/errors/NotFound";
 import ResetPasswordForm from "../../features/auth/ResetPasswordForm";
 import RequireAuth from "./RequireAuth";
+import ConfirmEmailForm from "../../features/auth/ConfirmEmailForm";
 
 export const routes = createBrowserRouter([
   {
@@ -18,8 +19,7 @@ export const routes = createBrowserRouter([
       { index: true, element: <LandingPage /> },
       {
         element: <RequireAuth />,
-        children: [         
-        ],
+        children: [{ path: "/confirm-email", element: <ConfirmEmailForm /> }],
       },
       { path: "register", element: <RegisterForm /> },
       { path: "login", element: <LoginForm /> },
