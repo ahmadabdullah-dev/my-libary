@@ -18,3 +18,11 @@ export const useLoginUser = () => {
     },
   });
 };
+export function useRegisterUser() {
+  return useMutation({
+    mutationFn: async (creds: RegisterDto) => {
+      const response = await agent.post("/Auth/register", creds);
+      return response;
+    },
+  });
+}
