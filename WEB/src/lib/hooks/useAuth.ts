@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import agent from "../api/agent";
-import type { LoginDto, RegisterDto } from "../types/auth.ts";
+import type { LoginDto, RegisterDto, ResetPasswordDto } from "../types/auth.ts";
 import { useNavigate } from "react-router";
 
 export const useLoginUser = () => {
@@ -47,6 +47,14 @@ export const useLogout = () => {
     onSuccess: async () => {
       await queryClient.removeQueries({ queryKey: ["currentUser"] });
       navigate("/");
+    },
+  });
+};
+export const useResetPasswordAsync = () => {
+  return useMutation({
+    mutationFn: async (creds: ResetPasswordDto) => {
+      const response = await agent.post("/auth/reset-password", creds);
+      return response.data;
     },
   });
 };
