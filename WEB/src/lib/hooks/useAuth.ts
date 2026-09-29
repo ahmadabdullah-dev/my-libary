@@ -36,3 +36,17 @@ export const useForgetPasswordAsync = () => {
     },
   });
 };
+export const useLogout = () => {
+  const queryClient = useQueryClient();
+  const navigate = useNavigate();
+
+  return useMutation({
+    mutationFn: async () => {
+      await agent.post("/auth/logout");
+    },
+    onSuccess: async () => {
+      await queryClient.removeQueries({ queryKey: ["currentUser"] });
+      navigate("/");
+    },
+  });
+};
